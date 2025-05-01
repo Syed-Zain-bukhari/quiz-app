@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body onload="nextQuestion()">
+    <div>
+      <h2 class="time" id="timer">2:00</h2>
+
+      <p class="question" id="ques"></p>
+      <br />
+      <div class="radio-input"></div>
+      <div class="card m-auto" style="width: 18rem">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <input
+              value="1"
+              onclick="clicked()"
+              type="radio"
+              name="options"
+            /><label class="label" for="" id="opt1"></label><br /><br />
+          </li>
+          <li class="list-group-item">
+            <input
+              value="2"
+              onclick="clicked()"
+              type="radio"
+              name="options"
+            /><label class="label" for="" id="opt2"></label><br /><br />
+          </li>
+          <li class="list-group-item">
+            <input
+              value="3"
+              onclick="clicked()"
+              type="radio"
+              name="options"
+            /><label class="label" for="" id="opt3"></label><br /><br />
+          </li>
+        </ul>
+        <button
+          class="btn btn-success text-center"
+          onclick="nextQuestion()"
+          id="btn"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  </body>
+  <script src="app.js"></script>
+</html>

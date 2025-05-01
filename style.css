@@ -1,0 +1,14 @@
+.time {
+  text-align: center;
+  background-color: rgb(rgba(0, 128, 45));
+  color: green;
+}
+.question {
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  font-size: large;
+  font-weight: bold;
+}
+.radio-input {
+  text-align: center;
+}
