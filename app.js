@@ -100,6 +100,7 @@ function nextQuestion() {
   var nextBtn = document.getElementById("btn");
 
   var alloptions = document.getElementsByTagName("input");
+  var obtmarks = document.getElementById('score');
 
   for (i = 0; i < alloptions.length; i++) {
     if (alloptions[i].checked) {
@@ -115,7 +116,7 @@ function nextQuestion() {
   }
   nextBtn.disabled = true;
   if (index > questions.length - 1) {
-    console.log(((score / questions.length) * 100).toFixed(2));
+    obtmarks.innerText = (((score / questions.length) * 100).toFixed(2));
   } else {
     quesElement.innerText = questions[index].question;
     option1.innerText = questions[index].option1;
