@@ -1,6 +1,15 @@
+body {
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
 .time {
-  text-align: center;
-  background-color: rgb(rgba(0, 128, 45));
+  text-align: right;
+  font-weight: bold;
   color: green;
 }
 .question {
@@ -9,6 +18,18 @@
   font-size: large;
   font-weight: bold;
 }
-.radio-input {
-  text-align: center;
+
+
+.label {
+  margin-left: 10px;
+}
+input[type="radio"]:checked + .label {
+  color: green;
+  font-weight: 600;
+}
+
+@media (max-width: 400px) {
+  .card {
+    width: 100% !important;
+  }
 }

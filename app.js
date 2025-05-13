@@ -1,3 +1,24 @@
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAVAH3s4GweJAQUpva6cpKH-4CsjxcKZpA",
+  authDomain: "linking-websited.firebaseapp.com",
+  databaseURL: "https://linking-websited-default-rtdb.firebaseio.com",
+  projectId: "linking-websited",
+  storageBucket: "linking-websited.firebasestorage.app",
+  messagingSenderId: "807062995318",
+  appId: "1:807062995318:web:949e52046570e9937b7a57",
+};
+
+// Initialize Firebase
+var app = firebase.initializeApp(firebaseConfig);
+// var auth = firebase.auth();
+
+// function signup(){
+//   var name = document.getElementById("name").value;
+//   var email = document.getElementById("email").value;
+//   var password = document.getElementById("password").value;
+// }
+
 var questions = [
   {
     question: "HTML Stands for",
@@ -80,6 +101,28 @@ var timer = document.getElementById("timer");
 var min = 1;
 var sec = 59;
 
+function startQuiz() {
+  const name = document.getElementById("username").value.trim();
+  const roll = document.getElementById("rollnumber").value.trim();
+
+  userdetails = {
+    name: name,
+    rollno: roll,
+  };
+  console.log(userdetails);
+
+  firebase.database().ref("student").set(userdetails);
+
+  if (name === "" || roll === "") {
+    alert("Please enter both name and roll number.");
+    return;
+  }
+  document.getElementById("userInfoSection").style.display = "none";
+  document.getElementById("quizSection").style.display = "block";
+
+  nextQuestion();
+}
+
 function startTimer() {
   int = setInterval(function () {
     timer.innerHTML = `0${min} : ${sec}`;
@@ -93,30 +136,40 @@ function startTimer() {
         nextQuestion();
       }
     }
-  }, 100);
+  }, 1000);
 }
 
 function nextQuestion() {
   var nextBtn = document.getElementById("btn");
 
   var alloptions = document.getElementsByTagName("input");
-  var obtmarks = document.getElementById('score');
+  var obtmarks = document.getElementById("score");
 
   for (i = 0; i < alloptions.length; i++) {
     if (alloptions[i].checked) {
       alloptions[i].checked = false;
       var selectedValue = alloptions[i].value;
       var selectedoption = questions[index - 1][`option${selectedValue}`];
-
       var correctAns = questions[index - 1]["corrAnswer"];
+
+      ansobj = {
+        uservalue: selectedoption,
+        correctvalue: correctAns,
+      };
+      console.log(ansobj);
+      firebase.database().ref("student").push(ansobj);
+
       if (selectedoption === correctAns) {
         score++;
       }
     }
   }
   nextBtn.disabled = true;
-  if (index > questions.length - 1) {
-    obtmarks.innerText = (((score / questions.length) * 100).toFixed(2));
+  if (index >= questions.length) {
+    obtmarks.innerText = `Your score is: ${(
+      (score / questions.length) *
+      100
+    ).toFixed(2)}`;
   } else {
     quesElement.innerText = questions[index].question;
     option1.innerText = questions[index].option1;
